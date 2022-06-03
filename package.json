@@ -20,6 +20,7 @@
     "eslint": "^8.16.0"
   },
   "dependencies": {
+    "discord.js": "^13.7.0",
     "dotenv": "^16.0.1"
   }
 }
