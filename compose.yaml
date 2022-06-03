@@ -2,12 +2,12 @@ services:
   bot:
     build: .
     volumes:
-      - bot-data:/bot/
+      - storage:/bot/
     env_file:
       - .env
 
 volumes:
-  bot-data: {}
+  storage: {}
 
 networks:
   front-tier: {}
