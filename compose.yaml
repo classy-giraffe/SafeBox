@@ -1,0 +1,14 @@
+services:
+  bot:
+    build: .
+    volumes:
+      - bot-data:/bot/
+    env_file:
+      - .env
+
+volumes:
+  bot-data: {}
+
+networks:
+  front-tier: {}
+  back-tier: {}

@@ -1,5 +1,6 @@
 node_modules
 Dockerfile
+compose.yaml
 .eslintrc.json
 .env
 .gitignore
