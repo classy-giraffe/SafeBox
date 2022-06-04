@@ -4,3 +4,5 @@
 
 ### Introduction
 A playground for testing Linux commands in safety through Discord APIs. It uses Node JS as runtime and it's self containered inside Docker.
+
+### How to use
