@@ -24,7 +24,6 @@ module.exports = {
 				.setThumbnail('https://i.imgur.com/AfFp7pu.png')
 				.addFields(
 					{ name: 'Output', value: stdout },
-					{ name: '\u200B', value: '\u200B' },
 				)
 				.setTimestamp()
 				.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
