@@ -12,22 +12,31 @@ module.exports = {
 				.setDescription('The code you want to execute')
 				.setRequired(true)),
 	async execute(interaction) {
+		const input = await interaction.options.getString('input');
 		try {
-			const input = await interaction.options.getString('input');
 			const { stdout } = await exec(input);
-			const output = new MessageEmbed()
-				.setColor('#0099ff')
+			const commandEmbed = new MessageEmbed()
+				.setColor('#55ff55')
 				.setAuthor({ name: 'Some name', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
 				.setThumbnail('https://i.imgur.com/AfFp7pu.png')
 				.addFields(
+					{ name: 'Input', value: codeBlock(input) },
 					{ name: 'Output', value: codeBlock(stdout) },
 				)
 				.setTimestamp();
-			await interaction.reply({ embeds: [ output ] });
+			await interaction.reply({ embeds: [ commandEmbed ] });
 		}
 		catch (error) {
-			console.log(error);
-			await interaction.reply('Something went wrong while executing the command.');
+			const commandEmbed = new MessageEmbed()
+				.setColor('#ff5555')
+				.setAuthor({ name: 'Some name', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
+				.setThumbnail('https://i.imgur.com/AfFp7pu.png')
+				.addFields(
+					{ name: 'Input', value: codeBlock(input) },
+					{ name: 'Output', value: codeBlock(error) },
+				)
+				.setTimestamp();
+			await interaction.reply({ embeds: [ commandEmbed ] });
 		}
 	},
 };
