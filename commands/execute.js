@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { spawn } = require('node:child_process');
-const { util } = require('node:util');
+const util = require('node:util');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -12,8 +12,7 @@ module.exports = {
 				.setRequired(true)),
 	async execute(interaction) {
 		try {
-			const input = interaction.options.getString('input');
-			console.log(input);
+			const input = await interaction.options.getString('input');
 			await util.promisify(spawn(input));
 		}
 		catch (error) {
