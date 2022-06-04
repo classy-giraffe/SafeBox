@@ -1,6 +1,7 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { spawn } = require('node:child_process');
 const util = require('node:util');
+const { SlashCommandBuilder } = require('@discordjs/builders');
+const { MessageEmbed } = require('discord.js');
+const exec = util.promisify(require('node:child_process').exec);
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -13,7 +14,21 @@ module.exports = {
 	async execute(interaction) {
 		try {
 			const input = await interaction.options.getString('input');
-			await util.promisify(spawn(input));
+			const { stdout } = await exec(input);
+			const output = new MessageEmbed()
+				.setColor('#0099ff')
+				.setTitle('Some title')
+				.setURL('https://discord.js.org/')
+				.setAuthor({ name: 'Some name', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
+				.setDescription('Some description here')
+				.setThumbnail('https://i.imgur.com/AfFp7pu.png')
+				.addFields(
+					{ name: 'Output', value: stdout },
+					{ name: '\u200B', value: '\u200B' },
+				)
+				.setTimestamp()
+				.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
+			await interaction.reply({ embeds: [ output ] });
 		}
 		catch (error) {
 			console.log(error);
