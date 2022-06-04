@@ -1,7 +1,9 @@
-node_modules
 Dockerfile
 compose.yaml
+node_modules
 .eslintrc.json
 .env
 .gitignore
 LICENSE
+README.md
+assets
