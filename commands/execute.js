@@ -18,7 +18,7 @@ module.exports = {
 			const commandEmbed = new MessageEmbed()
 				.setColor('#55ff55')
 				.setAuthor({ name: 'Some name', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
-				.setThumbnail('https://i.imgur.com/AfFp7pu.png')
+				.setThumbnail('https://raw.githubusercontent.com/classy-giraffe/SafeBox/main/assets/img/tick.png')
 				.addFields(
 					{ name: 'Input', value: codeBlock(input) },
 					{ name: 'Output', value: codeBlock(stdout) },
@@ -30,7 +30,7 @@ module.exports = {
 			const commandEmbed = new MessageEmbed()
 				.setColor('#ff5555')
 				.setAuthor({ name: 'Some name', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
-				.setThumbnail('https://i.imgur.com/AfFp7pu.png')
+				.setThumbnail('https://raw.githubusercontent.com/classy-giraffe/SafeBox/main/assets/img/error.png')
 				.addFields(
 					{ name: 'Input', value: codeBlock(input) },
 					{ name: 'Output', value: codeBlock(error) },
