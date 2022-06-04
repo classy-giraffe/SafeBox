@@ -1,5 +1,5 @@
 const util = require('node:util');
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder, codeBlock } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
 const exec = util.promisify(require('node:child_process').exec);
 
@@ -17,16 +17,12 @@ module.exports = {
 			const { stdout } = await exec(input);
 			const output = new MessageEmbed()
 				.setColor('#0099ff')
-				.setTitle('Some title')
-				.setURL('https://discord.js.org/')
 				.setAuthor({ name: 'Some name', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
-				.setDescription('Some description here')
 				.setThumbnail('https://i.imgur.com/AfFp7pu.png')
 				.addFields(
-					{ name: 'Output', value: stdout },
+					{ name: 'Output', value: codeBlock(stdout) },
 				)
-				.setTimestamp()
-				.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
+				.setTimestamp();
 			await interaction.reply({ embeds: [ output ] });
 		}
 		catch (error) {
