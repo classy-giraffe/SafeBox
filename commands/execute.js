@@ -1,5 +1,4 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { Client } = require('discord.js');
 const { spawn } = require('node:child_process');
 const { util } = require('node:util');
 
@@ -9,11 +8,13 @@ module.exports = {
 		.setDescription('Execute shell code inside a Docker container.')
 		.addStringOption(option =>
 			option.setName('input')
-				.setDescription('The input to echo back')
+				.setDescription('The code you want to execute')
 				.setRequired(true)),
 	async execute(interaction) {
 		try {
-			await util.promisify(spawn(Client));
+			const input = interaction.options.getString('input');
+			console.log(input);
+			await util.promisify(spawn(input));
 		}
 		catch (error) {
 			console.log(error);
