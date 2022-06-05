@@ -14,4 +14,5 @@ GUILD_ID=
 DISCORD_TOKEN=
 ```
 This is needed to deploy the bot correctly (make sure to set these variables)
+
 3. Start the bot like this: `docker compose up -d`
