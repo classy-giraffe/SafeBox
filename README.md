@@ -32,4 +32,4 @@ networks:
 ```
 This is needed to deploy the bot correctly (make sure to set these variables).
 
-2. Start the bot like this: `docker compose up -d`
+Start the bot like this: `docker compose up -d`
