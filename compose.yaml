@@ -1,5 +1,6 @@
 services:
   bot:
+    image: tommy03/safebox
     build: .
     volumes:
       - storage:/bot/
