@@ -1,6 +1,7 @@
 Dockerfile
 compose.yaml
 node_modules
+.github
 .eslintrc.json
 .env
 .gitignore
