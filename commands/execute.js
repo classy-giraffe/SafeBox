@@ -13,8 +13,8 @@ module.exports = {
 				.setRequired(true)),
 	async execute(interaction) {
 		const input = await interaction.options.getString('input');
+		const startup = Date.now();
 		try {
-			const startup = new Date.now();
 			const { stdout } = await exec(input);
 			const diff = Date.now() - startup;
 			const commandEmbed = new MessageEmbed()
@@ -29,6 +29,7 @@ module.exports = {
 			await interaction.reply({ embeds: [ commandEmbed ] });
 		}
 		catch (error) {
+			const diff = Date.now() - startup;
 			const commandEmbed = new MessageEmbed()
 				.setColor('#ff5555')
 				.setThumbnail('https://raw.githubusercontent.com/classy-giraffe/SafeBox/main/assets/img/error.png')
@@ -37,7 +38,7 @@ module.exports = {
 					{ name: 'Output', value: codeBlock(error) },
 				)
 				.setTimestamp()
-				.setFooter({ text: 'It took ms' });
+				.setFooter({ text: `It took ${diff}ms` });
 			await interaction.reply({ embeds: [ commandEmbed ] });
 		}
 	},
