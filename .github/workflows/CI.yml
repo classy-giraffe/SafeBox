@@ -8,7 +8,7 @@ on:
 
 jobs:
   analyze:
-    name: Analyze
+    name: Analyze vulnerabilities
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'javascript' ]
+        language: javascript
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -31,7 +31,7 @@ jobs:
       uses: github/codeql-action/analyze@v2
   
   push_to_registry:
-    name: Push Docker image to Docker Hub
+    name: Push Docker image to the registry
     needs: analyze
     runs-on: ubuntu-latest
     steps:
