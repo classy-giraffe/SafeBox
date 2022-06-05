@@ -7,13 +7,13 @@ SafeBox is a playground for testing Linux commands through Discord APIs. It uses
 
 ### How to use
 Define a file called `.env` like this:
-```
+```conf
 CLIENT_ID=
 GUILD_ID=
 DISCORD_TOKEN=
 ```
 Define a file called `compose.yaml` like this:
-```
+```yaml
 services:
   bot:
     image: tommy03/safebox
