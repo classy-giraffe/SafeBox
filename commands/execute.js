@@ -14,10 +14,9 @@ module.exports = {
 	async execute(interaction) {
 		const input = await interaction.options.getString('input');
 		try {
-			const startup = new Date();
+			const startup = new Date.now();
 			const { stdout } = await exec(input);
-			const ready = new Date();
-			const diff = ready.getTime() - startup.getTime();
+			const diff = Date.now() - startup;
 			const commandEmbed = new MessageEmbed()
 				.setColor('#55ff55')
 				.setThumbnail('https://raw.githubusercontent.com/classy-giraffe/SafeBox/main/assets/img/tick.png')
@@ -37,7 +36,8 @@ module.exports = {
 					{ name: 'Input', value: codeBlock(input) },
 					{ name: 'Output', value: codeBlock(error) },
 				)
-				.setTimestamp();
+				.setTimestamp()
+				.setFooter({ text: 'It took ms' });
 			await interaction.reply({ embeds: [ commandEmbed ] });
 		}
 	},

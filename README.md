@@ -1,7 +1,7 @@
 ![](https://img.shields.io/github/license/classy-giraffe/SafeBox)
 ![](https://img.shields.io/github/stars/classy-giraffe/SafeBox)
 ![](https://img.shields.io/github/forks/classy-giraffe/SafeBox)
-![](https://img.shields.io/github/workflow/status/classy-giraffe/SafeBox/SafeBox%20Docker%20image%20CI)
+![](https://img.shields.io/github/workflow/status/classy-giraffe/SafeBox/CI)
 
 ### Introduction
 [SafeBox](https://github.com/classy-giraffe/SafeBox) is a playground for testing Linux commands through Discord APIs. It uses Node JS as runtime and it's self containered inside Docker.
