@@ -6,10 +6,10 @@ const exec = util.promisify(require('node:child_process').exec);
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('execute')
-		.setDescription('Execute shell code inside a Docker container.')
+		.setDescription('Execute bash code inside a Docker container.')
 		.addStringOption(option =>
 			option.setName('input')
-				.setDescription('The code you want to execute')
+				.setDescription('The command you want to execute.')
 				.setRequired(true)),
 	async execute(interaction) {
 		const input = await interaction.options.getString('input');
