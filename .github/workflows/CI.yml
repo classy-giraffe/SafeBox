@@ -52,6 +52,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: tommy03/safebox
+          tags: type=raw,value=latest
       
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
