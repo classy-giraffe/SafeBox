@@ -1,7 +1,6 @@
 name: "CI"
 
 on:
-  workflow_dispatch:
   push:
     branches: [ "main" ]
     paths:
@@ -10,6 +9,8 @@ on:
     branches: [ "main" ]
     paths:
       - '**.js'
+  workflow_dispatch:
+  
 jobs:
   analyze:
     name: Analyze vulnerabilities
