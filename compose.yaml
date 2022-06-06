@@ -1,6 +1,6 @@
 services:
   bot:
-    image: tommy03/safebox:main
+    image: tommy03/safebox
     volumes:
       - storage:/bot/
     env_file:
