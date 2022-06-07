@@ -1,12 +1,12 @@
 require('dotenv').config();
 const fs = require('node:fs');
 const path = require('node:path');
+const { MongoClient } = require('mongodb');
 const { Client, Collection, Intents } = require('discord.js');
-
 const { token } = process.env.DISCORD_TOKEN;
-
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
+// Importing commands (from /commands)
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
@@ -17,6 +17,25 @@ for (const file of commandFiles) {
 	client.commands.set(command.data.name, command);
 }
 
+// Initializing MongoDB Connection
+const dbURL = process.env.MONGO_INITDB_URL;
+const dbClient = new MongoClient(dbURL);
+const dbName = 'myProject';
+
+async function main() {
+	await dbClient.connect();
+	console.log('Connected successfully to the MongoDB Instance.');
+	const db = dbClient.db(dbName);
+	const collection = db.collection('documents');
+	return 'done.';
+}
+
+main()
+	.then(console.log)
+	.catch(console.error)
+	.finally(() => dbClient.close());
+
+// Initializing Discord Bot instance
 client.once('ready', () => {
 	console.log('Ready!');
 });
