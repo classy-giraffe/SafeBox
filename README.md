@@ -9,9 +9,15 @@
 ### How to use
 Define a file called `.env` like this:
 ```conf
+# Discord configuration
 CLIENT_ID=
 GUILD_ID=
 DISCORD_TOKEN=
+
+# MongoDB credentials
+MONGO_INITDB_ROOT_USERNAME=
+MONGO_INITDB_ROOT_PASSWORD=
+MONGO_INITDB_URL=
 ```
 Define a file called `compose.yaml` like this:
 ```yaml
