@@ -3,17 +3,22 @@ services:
     build: .
     # image: tommy03/safebox
     volumes:
-      - storage:/bot/
+      - storage:/bot
     env_file:
       - .env
   mongodb:
     image: mongo
+    volumes:
+      - configdb:/data/configdb
+      - db:/data/db
     restart: always
     env_file:
       - .env
 
 volumes:
-  storage: {}
+  storage:
+  db:
+  configdb:
 
 networks:
   front-tier: {}
