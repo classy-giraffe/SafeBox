@@ -1,7 +1,7 @@
 {
   "name": "safebox",
   "version": "1.0.0",
-  "description": "",
+  "description": "A playground for testing Linux commands in safety through Discord APIs.",
   "main": "index.js",
   "scripts": {
     "start": "node deploy-commands.js && node index.js"
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/classy-giraffe/SafeBox.git"
   },
   "author": "classy-giraffe",
-  "license": "GPL-3.0",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/classy-giraffe/SafeBox/issues"
   },
