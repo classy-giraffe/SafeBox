@@ -11,8 +11,6 @@
 Define a file called `.env` like this:
 ```conf
 # Discord configuration
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fclassy-giraffe%2FSafeBox.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fclassy-giraffe%2FSafeBox?ref=badge_shield)
-
 CLIENT_ID=
 GUILD_ID=
 DISCORD_TOKEN=
@@ -43,5 +41,5 @@ This is needed to deploy the bot correctly (make sure to set these variables).
 
 Start the bot like this: `docker compose up -d`
 
-## License
+### License
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fclassy-giraffe%2FSafeBox.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fclassy-giraffe%2FSafeBox?ref=badge_large)
