@@ -19,21 +19,19 @@ for (const file of commandFiles) {
 
 // Initializing MongoDB Connection
 const dbURL = process.env.MONGO_INITDB_URL;
-const dbClient = new MongoClient(dbURL);
-const dbName = 'myProject';
+const nodeClient = new MongoClient(dbURL);
 
-async function main() {
-	await dbClient.connect();
-	console.log('Connected successfully to the MongoDB Instance.');
-	const db = dbClient.db(dbName);
-	const collection = db.collection('documents');
-	return 'done.';
+async function run() {
+	try {
+		await nodeClient.connect();
+		await nodeClient.db('admin').command({ ping: 1 });
+		console.log('Connected successfully to MongoDB!');
+	}
+	finally {
+		await nodeClient.close();
+	}
 }
-
-main()
-	.then(console.log)
-	.catch(console.error)
-	.finally(() => dbClient.close());
+run().catch(console.dir);
 
 // Initializing Discord Bot instance
 client.once('ready', () => {

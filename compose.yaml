@@ -1,12 +1,11 @@
 services:
-  
   bot:
-    image: tommy03/safebox
+    build: .
+    # image: tommy03/safebox
     volumes:
       - storage:/bot/
     env_file:
       - .env
-  
   mongodb:
     image: mongo
     restart: always
