@@ -75,4 +75,5 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: tommy03/safebox
-        short-description: ${{ github.event.repository.description }}    
+        short-description: ${{ github.event.repository.description }}
+        readme-filepath: ./README.md

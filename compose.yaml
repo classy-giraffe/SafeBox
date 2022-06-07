@@ -12,6 +12,8 @@ services:
       - configdb:/data/configdb
       - db:/data/db
     restart: always
+    ports:
+      - 27017:27017
     env_file:
       - .env
 
