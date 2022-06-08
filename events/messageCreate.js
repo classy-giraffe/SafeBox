@@ -4,13 +4,13 @@ module.exports = {
 	name: 'messageCreate',
 	async execute(message) {
 		try {
-			console.log(message.createdAt);
 			const messageInfo = await messageModel.create({
 				authorUserId: message.author.id,
 				authorUserTag: `${message.author.username}#${message.author.discriminator}`,
 				guildId: message.guildId,
-				channel: message.channelId,
+				channelId: message.channelId,
 				id: message.id,
+				createdAt: message.createdAt,
 				content: message.content,
 			});
 			await messageInfo.save();
