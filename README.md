@@ -26,12 +26,24 @@ services:
   bot:
     image: tommy03/safebox
     volumes:
-      - storage:/bot/
+      - bot:/bot
+    env_file:
+      - .env
+  mongodb:
+    image: mongo
+    volumes:
+      - configdb:/data/configdb
+      - db:/data/db
+    restart: always
+    ports:
+      - 27017:27017
     env_file:
       - .env
 
 volumes:
-  storage: {}
+  bot:
+  db:
+  configdb:
 
 networks:
   front-tier: {}
