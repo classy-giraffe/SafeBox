@@ -1,15 +1,18 @@
 const mongoose = require('mongoose');
 
-const messageSchema = new mongoose.Schema({
+const interactionSchema = new mongoose.Schema({
 	authorUserId: { type: String, require: true },
 	authorUserTag: { type: String, require: true },
 	guildId: { type: String, require: true },
 	channelId: { type: String, require: true },
 	id: { type: String, require: true },
 	createdAt: { type: Date, require: true },
-	content: { type: String, require: true },
+	interaction: {
+		name: { type: String },
+		parameters: { type: String },
+	},
 });
 
-const model = mongoose.model('messageLog', messageSchema);
+const model = mongoose.model('interactionLog', interactionSchema);
 
 module.exports = model;

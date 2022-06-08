@@ -1,10 +1,10 @@
-const messageModel = require('../models/messageSchema');
+const messageLog = require('../models/messageSchema');
 
 module.exports = {
 	name: 'messageCreate',
 	async execute(message) {
 		try {
-			const messageInfo = await messageModel.create({
+			const messageInfo = await messageLog.create({
 				authorUserId: message.author.id,
 				authorUserTag: `${message.author.username}#${message.author.discriminator}`,
 				guildId: message.guildId,

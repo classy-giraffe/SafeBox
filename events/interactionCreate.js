@@ -1,4 +1,4 @@
-// const profileModel = require('../models/profileSchema');
+const interactionLog = require('../models/interactionSchema');
 
 module.exports = {
 	name: 'interactionCreate',
@@ -6,14 +6,19 @@ module.exports = {
 		if (!interaction.isCommand()) return;
 		const command = await interaction.client.commands.get(interaction.commandName);
 		if (!command) return;
+		console.log(interaction.options._hoistedOptions[0]['value']);
 		try {
 			await command.execute(interaction);
-			/* const profile = await profileModel.create({
-				userID: interaction.user.id,
-				userTag: interaction.user.tag,
-				guildID: interaction.guild.id,
+			const interactionInfo = await interactionLog.create({
+				authorUserId: interaction.user.id,
+				authorUserTag: interaction.user.tag,
+				guildId: interaction.guild.id,
+				channelId: interaction.channelId,
+				id: interaction.id,
+				createdAt: interaction.createdAt,
+				interaction: 's',
 			});
-			await profile.save(); */
+			await interactionInfo.save();
 		}
 		catch (error) {
 			console.error(error);
