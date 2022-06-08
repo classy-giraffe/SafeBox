@@ -1,4 +1,4 @@
-const profileModel = require('../models/profileSchema');
+// const profileModel = require('../models/profileSchema');
 
 module.exports = {
 	name: 'interactionCreate',
@@ -8,12 +8,12 @@ module.exports = {
 		if (!command) return;
 		try {
 			await command.execute(interaction);
-			const profile = await profileModel.create({
+			/* const profile = await profileModel.create({
 				userID: interaction.user.id,
 				userTag: interaction.user.tag,
 				guildID: interaction.guild.id,
 			});
-			await profile.save();
+			await profile.save(); */
 		}
 		catch (error) {
 			console.error(error);
