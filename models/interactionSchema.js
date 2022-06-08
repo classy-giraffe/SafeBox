@@ -7,10 +7,7 @@ const interactionSchema = new mongoose.Schema({
 	channelId: { type: String, require: true },
 	id: { type: String, require: true },
 	createdAt: { type: Date, require: true },
-	interaction: {
-		name: { type: String },
-		parameters: { type: String },
-	},
+	interaction: { type: Map, of: String },
 });
 
 const model = mongoose.model('interactionLog', interactionSchema);

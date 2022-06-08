@@ -6,7 +6,6 @@ module.exports = {
 		if (!interaction.isCommand()) return;
 		const command = await interaction.client.commands.get(interaction.commandName);
 		if (!command) return;
-		console.log(interaction.options._hoistedOptions[0]['value']);
 		try {
 			await command.execute(interaction);
 			const interactionInfo = await interactionLog.create({
@@ -16,7 +15,10 @@ module.exports = {
 				channelId: interaction.channelId,
 				id: interaction.id,
 				createdAt: interaction.createdAt,
-				interaction: 's',
+				interaction: {
+					name: interaction.commandName,
+					parameters: interaction.options._hoistedOptions[0].value,
+				},
 			});
 			await interactionInfo.save();
 		}
