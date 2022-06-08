@@ -1,9 +1,8 @@
 services:
   bot:
-    build: .
-    # image: tommy03/safebox
+    image: tommy03/safebox
     volumes:
-      - storage:/bot
+      - bot:/bot
     env_file:
       - .env
   mongodb:
@@ -18,7 +17,7 @@ services:
       - .env
 
 volumes:
-  storage:
+  bot:
   db:
   configdb:
 

@@ -32,14 +32,15 @@ for (const file of eventFiles) {
 
 // Initializing MongoDB Connection
 const dbURL = process.env.MONGO_INITDB_URL;
-async function main() {
+try {
 	mongoose.connect(dbURL, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 	});
+	console.log('Connected to MongoDB!');
 }
-main()
-	.then(() => console.log('Connected to MongoDB!'))
-	.catch(err => console.log(err));
+catch (err) {
+	console.error(err);
+}
 
 client.login(token);
