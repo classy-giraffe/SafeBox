@@ -4,7 +4,7 @@
   "description": "A playground for testing Linux commands in safety through Discord APIs.",
   "main": "index.js",
   "scripts": {
-    "start": "node deploy-commands.js && pm2 start index.js --watch"
+    "start": "node deploy-commands.js && pm2 start index.js --watch --no-daemon"
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { guild } = require('discord.js');
+
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -10,15 +10,23 @@ module.exports = {
 				.setDescription('The user you want to ban.')
 				.setRequired(true)),
 	async execute(interaction) {
-		const user = interaction.options.getUser('target');
-		console.log(guild.members);
+		if (interaction.options.getUser('user').id === process.env.CLIENT_ID) {
+			await interaction.reply('You can\'t ban the bot.');
+			return;
+		}
+		if (interaction.options.getUser('user').id === interaction.guild.ownerId) {
+			await interaction.reply('You can\'t ban the server owner.');
+			return;
+		}
 		try {
-			guild.members.ban(user);
+			const user = await interaction.options.getUser('user');
+			await interaction.guild.members.ban(user);
 			await interaction.reply('User banned correctly!');
 		}
 		catch (err) {
-			console.error(err);
-			await interaction.reply('Something went wrong!');
+			if (err.message === 'Missing Permissions') {
+				await interaction.reply('The bot is missing permissions.');
+			}
 		}
 
 	},
