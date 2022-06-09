@@ -31,8 +31,7 @@ for (const file of eventFiles) {
 }
 
 // Initializing MongoDB Connection
-// const dbURL = process.env.MONGO_INITDB_URL;
-const dbURL = 'mongodb://root:example@0.0.0.0:27017/';
+const dbURL = process.env.MONGO_INITDB_URL;
 try {
 	mongoose.connect(dbURL, {
 		useNewUrlParser: true,

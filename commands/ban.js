@@ -1,6 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
-
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('ban')
@@ -11,10 +10,14 @@ module.exports = {
 				.setRequired(true)),
 	async execute(interaction) {
 		if (interaction.options.getUser('user').id === process.env.CLIENT_ID) {
-			await interaction.reply('You can\'t ban the bot.');
+			await interaction.reply('You can\'t ban this bot recursively, please do it manually.');
 			return;
 		}
-		if (interaction.options.getUser('user').id === interaction.guild.ownerId) {
+		if (interaction.guild.me.roles.highest.position <= interaction.options.getMember('user').roles.highest.position) {
+			await interaction.reply('You can\'t ban somebody who has an equal or higher role than the bot.');
+			return;
+		}
+		if (interaction.options.getMember('user').id === interaction.guild.ownerId) {
 			await interaction.reply('You can\'t ban the server owner.');
 			return;
 		}
