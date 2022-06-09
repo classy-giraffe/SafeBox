@@ -17,7 +17,7 @@ module.exports = {
 				createdAt: interaction.createdAt,
 				interaction: {
 					name: interaction.commandName,
-					parameters: interaction.options?._hoistedOptions[0]?.value,
+					parameters: interaction.options.getString('input'),
 				},
 			});
 			await interactionInfo.save();
