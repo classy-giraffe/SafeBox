@@ -1,10 +1,2 @@
-Dockerfile
-compose.yaml
-node_modules
-.github
-.eslintrc.json
-.env
-.gitignore
-LICENSE
-README.md
-assets
+src/node_modules
+src/.env
