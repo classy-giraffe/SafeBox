@@ -1,6 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
-const { PermissionFlagsBits } = require('discord-api-types/v10');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -13,8 +12,7 @@ module.exports = {
 		.addStringOption(option =>
 			option.setName('reason')
 				.setDescription('The reason the user was banned for.'),
-		)
-		.setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
+		),
 	async execute(interaction) {
 		if (interaction.options.getUser('user').id === process.env.CLIENT_ID) {
 			const errorEmbed = new MessageEmbed()
