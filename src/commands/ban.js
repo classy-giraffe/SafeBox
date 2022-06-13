@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
+const { PermissionFlagsBits } = require('discord-api-types/v10');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -8,7 +9,12 @@ module.exports = {
 		.addUserOption(option =>
 			option.setName('user')
 				.setDescription('The user you want to ban.')
-				.setRequired(true)),
+				.setRequired(true))
+		.addStringOption(option =>
+			option.setName('reason')
+				.setDescription('The reason the user was banned for.'),
+		)
+		.setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
 	async execute(interaction) {
 		if (interaction.options.getUser('user').id === process.env.CLIENT_ID) {
 			const errorEmbed = new MessageEmbed()
@@ -18,7 +24,7 @@ module.exports = {
 					{ name: 'Error', value: 'You can\'t ban this bot recursively, please do it manually.' },
 				)
 				.setTimestamp();
-			await interaction.reply({ embeds: [ errorEmbed ] });
+			await interaction.reply({ embeds: [ errorEmbed ], ephemeral: true });
 			return;
 		}
 		if (interaction.guild.me.roles.highest.position <= interaction.options.getMember('user').roles.highest.position) {
@@ -29,7 +35,7 @@ module.exports = {
 					{ name: 'Error', value: 'You can\'t ban somebody who has an equal or higher role than the bot.' },
 				)
 				.setTimestamp();
-			await interaction.reply({ embeds: [ errorEmbed ] });
+			await interaction.reply({ embeds: [ errorEmbed ], ephemeral: true });
 			return;
 		}
 		if (interaction.options.getMember('user').id === interaction.guild.ownerId) {
@@ -40,7 +46,7 @@ module.exports = {
 					{ name: 'Error', value: 'You can\'t ban the server owner.' },
 				)
 				.setTimestamp();
-			await interaction.reply({ embeds: [ errorEmbed ] });
+			await interaction.reply({ embeds: [ errorEmbed ], ephemeral: true });
 			return;
 		}
 		try {
@@ -54,18 +60,17 @@ module.exports = {
 				)
 				.setTimestamp();
 			await interaction.reply({ embeds: [ successEmbed ] });
+			await interaction.deleteReply();
 		}
 		catch (err) {
-			if (err.message === 'Missing Permissions') {
-				const errorEmbed = new MessageEmbed()
-					.setColor('#ff5555')
-					.setThumbnail('https://raw.githubusercontent.com/classy-giraffe/SafeBox/main/assets/img/error.png')
-					.addFields(
-						{ name: 'Error', value: 'The bot is missing permissions.' },
-					)
-					.setTimestamp();
-				await interaction.reply({ embeds: [ errorEmbed ] });
-			}
+			const errorEmbed = new MessageEmbed()
+				.setColor('#ff5555')
+				.setThumbnail('https://raw.githubusercontent.com/classy-giraffe/SafeBox/main/assets/img/error.png')
+				.addFields(
+					{ name: 'Error', value: err.message },
+				)
+				.setTimestamp();
+			await interaction.reply({ embeds: [ errorEmbed ], ephemeral: true });
 		}
 
 	},
