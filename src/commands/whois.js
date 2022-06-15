@@ -9,18 +9,24 @@ module.exports = {
 			option.setName('user')
 				.setDescription('The user you want info about.')),
 	async execute(interaction) {
-		chosenMember = await interaction.options.getUser('user') || interaction.user
-		extractBio = `
-**Nickname:** ${chosenMember.username}
-**Discriminator:** ${chosenMember.discriminator}
-**Created At:** ${chosenMember.createdAt}
-**Bot?:** **${chosenMember.bot ? "True" : "False"}${chosenMember.bot ? "" : ", but you never know."}**
-`
-		const info = new MessageEmbed()
-			.setColor('#55ff55')
-			.setTitle('User Info:')
-			.setDescription(extractBio)
-		interaction.reply({ embeds: [info] });
-
+		try {
+			chosenMember = await interaction.options.getUser('user') || interaction.user
+			extractBio = `
+	**Nickname:** ${chosenMember.username}
+	**Discriminator:** ${chosenMember.discriminator}
+	**Created At:** ${chosenMember.createdAt}
+	**Bot?:** **${chosenMember.bot ? "True" : "False"}${chosenMember.bot ? "" : ", but you never know."}**
+	`
+			const info = new MessageEmbed()
+				.setColor('#55ff55')
+				.setTitle('Whois:')
+				.setDescription(extractBio)
+			interaction.reply({ embeds: [info] });
+		}
+		catch (err) {
+			if (err.message === 'Missing Permissions') {
+				await interaction.reply('The bot is missing permissions.');
+			}
+		}
 	},
 };
