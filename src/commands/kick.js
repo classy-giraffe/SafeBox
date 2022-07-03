@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -10,27 +11,60 @@ module.exports = {
 				.setRequired(true)),
 	async execute(interaction) {
 		if (interaction.options.getUser('user').id === process.env.CLIENT_ID) {
-			await interaction.reply('You can\'t kick this bot recursively, please do it manually.');
+			const errorEmbed = new MessageEmbed()
+				.setColor('#ff5555')
+				.setThumbnail('https://raw.githubusercontent.com/classy-giraffe/SafeBox/main/assets/img/error.png')
+				.addFields(
+					{ name: 'Error', value: 'You can\'t kick this bot recursively, please do it manually.' },
+				)
+				.setTimestamp();
+			await interaction.reply({ embeds: [ errorEmbed ], ephemeral: true });
 			return;
 		}
 		if (interaction.guild.me.roles.highest.position <= interaction.options.getMember('user').roles.highest.position) {
-			await interaction.reply('You can\'t kick somebody who has an equal or higher role than the bot.');
+			const errorEmbed = new MessageEmbed()
+				.setColor('#ff5555')
+				.setThumbnail('https://raw.githubusercontent.com/classy-giraffe/SafeBox/main/assets/img/error.png')
+				.addFields(
+					{ name: 'Error', value: 'You can\'t kick somebody who has an equal or higher role than the bot.' },
+				)
+				.setTimestamp();
+			await interaction.reply({ embeds: [ errorEmbed ], ephemeral: true });
 			return;
 		}
 		if (interaction.options.getMember('user').id === interaction.guild.ownerId) {
-			await interaction.reply('You can\'t kick the server owner.');
+			const errorEmbed = new MessageEmbed()
+				.setColor('#ff5555')
+				.setThumbnail('https://raw.githubusercontent.com/classy-giraffe/SafeBox/main/assets/img/error.png')
+				.addFields(
+					{ name: 'Error', value: 'You can\'t kick the server owner.' },
+				)
+				.setTimestamp();
+			await interaction.reply({ embeds: [ errorEmbed ], ephemeral: true });
 			return;
 		}
 		try {
 			const user = await interaction.options.getUser('user');
 			await interaction.guild.members.kick(user);
-			await interaction.reply('User kicked correctly!');
+			const successEmbed = new MessageEmbed()
+				.setColor('#55ff55')
+				.setThumbnail('https://raw.githubusercontent.com/classy-giraffe/SafeBox/main/assets/img/tick.png')
+				.addFields(
+					{ name: 'Success', value: 'User kicked correctly!' },
+				)
+				.setTimestamp();
+			await interaction.reply({ embeds: [ successEmbed ] });
+			await interaction.deleteReply();
 		}
 		catch (err) {
-			if (err.message === 'Missing Permissions') {
-				await interaction.reply('The bot is missing permissions.');
-			}
+			const errorEmbed = new MessageEmbed()
+				.setColor('#ff5555')
+				.setThumbnail('https://raw.githubusercontent.com/classy-giraffe/SafeBox/main/assets/img/error.png')
+				.addFields(
+					{ name: 'Error', value: err.message },
+				)
+				.setTimestamp();
+			await interaction.reply({ embeds: [ errorEmbed ], ephemeral: true });
 		}
-
 	},
 };
