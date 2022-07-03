@@ -3,13 +3,6 @@ const { SlashCommandBuilder, codeBlock } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
 const exec = util.promisify(require('node:child_process').exec);
 
-const clean = async (token, text) => {
-	if (typeof text !== 'string') {text = require('util').inspect(text, { depth: 1 });}
-	text = text
-		.replaceAll(token, '[TOKEN]');
-	return text;
-};
-
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('execute')
@@ -23,14 +16,13 @@ module.exports = {
 		const startup = Date.now();
 		try {
 			const { stdout } = await exec(input);
-			const cleanStdout = await clean(token, stdout);
 			const diff = Date.now() - startup;
 			const commandEmbed = new MessageEmbed()
 				.setColor('#55ff55')
 				.setThumbnail('https://raw.githubusercontent.com/classy-giraffe/SafeBox/main/assets/img/tick.png')
 				.addFields(
 					{ name: 'Input', value: codeBlock(input) },
-					{ name: 'Output', value: codeBlock(cleanStdout) },
+					{ name: 'Output', value: codeBlock(stdout) },
 				)
 				.setTimestamp()
 				.setFooter({ text: `It took ${diff}ms` });
