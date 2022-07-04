@@ -3,6 +3,7 @@ const messageLog = require('../models/messageSchema');
 module.exports = {
 	name: 'messageCreate',
 	async execute(message) {
+		if (message.author.bot) return;
 		try {
 			const messageInfo = await messageLog.create({
 				authorUserId: message.author.id,
