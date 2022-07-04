@@ -9,6 +9,6 @@ module.exports = {
 			option.setName('user')
 				.setDescription('The user you want info about.')),
 	async execute(interaction) {
-		console.log('hi');
+		console.log(interaction.options.data);
 	},
 };

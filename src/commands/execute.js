@@ -8,20 +8,20 @@ module.exports = {
 		.setName('execute')
 		.setDescription('Execute bash code inside a Docker container.')
 		.addStringOption(option =>
-			option.setName('command')
+			option.setName('input')
 				.setDescription('The command you want to execute.')
 				.setRequired(true)),
 	async execute(interaction) {
-		const command = await interaction.options.getString('command');
+		const input = await interaction.options.getString('input');
 		const startup = Date.now();
 		try {
-			const { stdout } = await exec(command);
+			const { stdout } = await exec(input);
 			const diff = Date.now() - startup;
 			const commandEmbed = new MessageEmbed()
 				.setColor('#55ff55')
 				.setThumbnail('https://raw.githubusercontent.com/classy-giraffe/SafeBox/main/assets/img/tick.png')
 				.addFields(
-					{ name: 'Command', value: codeBlock(command) },
+					{ name: 'Input', value: codeBlock(input) },
 					{ name: 'Output', value: codeBlock(stdout) },
 				)
 				.setTimestamp()
@@ -34,7 +34,7 @@ module.exports = {
 				.setColor('#ff5555')
 				.setThumbnail('https://raw.githubusercontent.com/classy-giraffe/SafeBox/main/assets/img/error.png')
 				.addFields(
-					{ name: 'Command', value: codeBlock(command) },
+					{ name: 'Input', value: codeBlock(input) },
 					{ name: 'Output', value: codeBlock(error) },
 				)
 				.setTimestamp()
