@@ -14,7 +14,7 @@ module.exports = {
 	async execute(interaction) {
 		const slap = new MessageEmbed()
 			.setColor('#55ff55')
-			.setTitle('gives a slap to')
+			.setTitle('You gave a slap!')
 			.setURL('https://github.com/classy-giraffe')
 			.setFooter({ text: 'That\'s <> slaps now!' });
 		await interaction.reply({ embeds: [ slap ] });

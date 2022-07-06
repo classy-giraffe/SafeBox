@@ -14,7 +14,7 @@ module.exports = {
 	async execute(interaction) {
 		const pet = new MessageEmbed()
 			.setColor('#55ff55')
-			.setTitle('gives a pet to')
+			.setTitle('You gave a pet!')
 			.setURL('https://github.com/classy-giraffe')
 			.setFooter({ text: 'That\'s <> pets now!' });
 		await interaction.reply({ embeds: [ pet ] });

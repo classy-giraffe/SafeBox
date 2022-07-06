@@ -14,7 +14,7 @@ module.exports = {
 	async execute(interaction) {
 		const kiss = new MessageEmbed()
 			.setColor('#55ff55')
-			.setTitle('gives a kiss to')
+			.setTitle('You gave a kiss!')
 			.setURL('https://github.com/classy-giraffe')
 			.setFooter({ text: 'That\'s <> kisss now!' });
 		await interaction.reply({ embeds: [ kiss ] });

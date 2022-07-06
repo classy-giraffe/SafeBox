@@ -14,7 +14,7 @@ module.exports = {
 	async execute(interaction) {
 		const spank = new MessageEmbed()
 			.setColor('#55ff55')
-			.setTitle('gives a spank to')
+			.setTitle('You gave a spank!')
 			.setURL('https://github.com/classy-giraffe')
 			.setFooter({ text: 'That\'s <> spanks now!' });
 		await interaction.reply({ embeds: [ spank ] });

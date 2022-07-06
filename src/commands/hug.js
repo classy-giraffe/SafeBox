@@ -14,7 +14,7 @@ module.exports = {
 	async execute(interaction) {
 		const hug = new MessageEmbed()
 			.setColor('#55ff55')
-			.setTitle('gives a hug to')
+			.setTitle('You gave a hug!')
 			.setURL('https://github.com/classy-giraffe')
 			.setFooter({ text: 'That\'s <> hugs now!' });
 		await interaction.reply({ embeds: [ hug ] });
