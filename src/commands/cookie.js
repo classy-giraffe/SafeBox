@@ -12,12 +12,13 @@ module.exports = {
 				.setRequired(true),
 		),
 	async execute(interaction) {
-		console.log(interaction.options.getUser('user'));
+		const cookie_sender = interaction.user.id;
+		const cookie_receiver = interaction.options.getUser('user').id;
 		const cookie = new MessageEmbed()
 			.setColor('#55ff55')
 			.setTitle('You gave a cookie!')
 			.setURL('https://github.com/classy-giraffe')
-			.setDescription('gives a cookie to')
+			.setDescription(`<@${cookie_sender}> gives a cookie to <@${cookie_receiver}>`)
 			.setFooter({ text: 'That\'s <> cookies now!' });
 		await interaction.reply({ embeds: [ cookie ] });
 	},

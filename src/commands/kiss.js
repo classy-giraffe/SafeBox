@@ -12,11 +12,14 @@ module.exports = {
 				.setRequired(true),
 		),
 	async execute(interaction) {
+		const kiss_sender = interaction.user.id;
+		const kiss_receiver = interaction.options.getUser('user').id;
 		const kiss = new MessageEmbed()
 			.setColor('#55ff55')
 			.setTitle('You gave a kiss!')
 			.setURL('https://github.com/classy-giraffe')
-			.setFooter({ text: 'That\'s <> kisss now!' });
+			.setDescription(`<@${kiss_sender}> kisses <@${kiss_receiver}>`)
+			.setFooter({ text: 'That\'s <> kisses now!' });
 		await interaction.reply({ embeds: [ kiss ] });
 	},
 };
