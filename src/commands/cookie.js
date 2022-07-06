@@ -17,6 +17,7 @@ module.exports = {
 			.setColor('#55ff55')
 			.setTitle('You gave a cookie!')
 			.setURL('https://github.com/classy-giraffe')
+			.setDescription('gives a cookie to')
 			.setFooter({ text: 'That\'s <> cookies now!' });
 		await interaction.reply({ embeds: [ cookie ] });
 	},
