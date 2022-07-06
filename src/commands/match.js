@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('cookie')
+		.setName('match')
 		.setDescription('Give somebody a cookie.')
 		.addUserOption(option =>
 			option
