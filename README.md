@@ -5,7 +5,7 @@
 ![](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fclassy-giraffe%2FSafeBox.svg?type=shield)
 
 ### Introduction
-[SafeBox](https://github.com/classy-giraffe/SafeBox) is a playground for testing Linux commands through Discord APIs. It uses Node JS as runtime and it's self containered inside Docker.
+[SafeBox](https://github.com/classy-giraffe/SafeBox) is a discord bot. It uses Node JS as runtime and it's self containered inside Docker.
 
 ### How to use
 Define a file called `.env` like this:
