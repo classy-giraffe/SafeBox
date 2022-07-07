@@ -1,12 +1,10 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
-const murmurhash = require('murmurhash');
 
 async function affinityCheck(primaryID, secondaryID) {
-	const x = Math.floor(primaryID);
-	const y = Math.floor(secondaryID);
+	const x = primaryID;
+	const y = secondaryID;
 	const z = Math.log(Math.floor((x + y) / 2)).toString();
-	return murmurhash.v3(z);
 }
 
 module.exports = {
