@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-	ID: { type: Number, unique: true, require: true },
+	userID: { type: Number, unique: true, require: true },
 	cookies: { type: Number, default: 0 },
 	hugs: { type: Number, default: 0 },
 	pets: { type: Number, default: 0 },

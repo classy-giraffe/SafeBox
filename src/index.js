@@ -4,7 +4,13 @@ const path = require('node:path');
 const mongoose = require('mongoose');
 const { Client, Collection, Intents } = require('discord.js');
 const { token } = process.env.DISCORD_TOKEN;
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({
+	intents: [
+		Intents.FLAGS.GUILDS,
+		Intents.FLAGS.GUILD_MESSAGES,
+		Intents.FLAGS.GUILD_MEMBERS,
+	],
+});
 
 // Importing commands (from ./commands)
 client.commands = new Collection();

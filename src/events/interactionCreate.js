@@ -1,5 +1,3 @@
-const interactionLog = require('../models/interactionSchema');
-
 module.exports = {
 	name: 'interactionCreate',
 	async execute(interaction) {
@@ -8,19 +6,6 @@ module.exports = {
 		if (!command) return;
 		try {
 			await command.execute(interaction);
-			const interactionInfo = await interactionLog.create({
-				authorUserId: interaction.user.id,
-				authorUserTag: interaction.user.tag,
-				guildId: interaction.guild.id,
-				channelId: interaction.channelId,
-				id: interaction.id,
-				createdAt: interaction.createdAt,
-				interaction: {
-					name: interaction.commandName,
-					parameters: interaction.options.getString('input'),
-				},
-			});
-			await interactionInfo.save();
 		}
 		catch (error) {
 			console.error(error);
