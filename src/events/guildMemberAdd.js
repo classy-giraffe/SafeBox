@@ -7,7 +7,7 @@ module.exports = {
 			const profile = await userModel.create({
 				userID:  member.id,
 			});
-			profile.save();
+			await profile.save();
 		}
 		catch (err) {
 			console.error(err);
