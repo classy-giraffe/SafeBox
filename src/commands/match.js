@@ -1,11 +1,4 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
-
-async function affinityCheck(primaryID, secondaryID) {
-	const x = primaryID;
-	const y = secondaryID;
-	const z = Math.log(Math.floor((x + y) / 2)).toString();
-}
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -26,13 +19,13 @@ module.exports = {
 		if (!interaction.options.getUser('optional_user')) {
 			const mainUserID = interaction.options.getUser('main_user').id;
 			const interactionUserID = interaction.user.id;
-			const affinity = await affinityCheck(mainUserID, interactionUserID);
+			const affinity = "placeholder";
 			console.log(affinity);
 		}
 		else {
 			const mainUserID = interaction.options.getUser('main_user').id;
 			const optionalUserID = interaction.options.getUser('optional_user').id;
-			const affinity = await affinityCheck(mainUserID, optionalUserID);
+			const affinity = "placeholder";
 			console.log(affinity);
 		}
 	},
