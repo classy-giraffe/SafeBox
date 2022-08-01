@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
+const userModel = require('../models/userSchema');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -14,12 +15,18 @@ module.exports = {
 	async execute(interaction) {
 		const kiss_sender = interaction.user.id;
 		const kiss_receiver = interaction.options.getUser('user').id;
-		const kiss = new MessageEmbed()
+		const profile = await userModel.findOne({
+			userID: kiss_receiver,
+		});
+		const kisses = profile.kisses;
+		profile.kisses = kisses + 1;
+		await profile.save();
+		const embed = new MessageEmbed()
 			.setColor('#55ff55')
 			.setTitle('You gave a kiss!')
 			.setURL('https://github.com/classy-giraffe')
 			.setDescription(`<@${kiss_sender}> kisses <@${kiss_receiver}>`)
-			.setFooter({ text: 'That\'s <> kisses now!' });
-		await interaction.reply({ embeds: [ kiss ] });
+			.setFooter({ text: `That's ${profile.kisses} kisses now!` });
+		await interaction.reply({ embeds: [ embed ] });
 	},
 };

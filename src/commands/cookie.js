@@ -13,7 +13,6 @@ module.exports = {
 				.setRequired(true),
 		),
 	async execute(interaction) {
-		// find number of cookies
 		const cookie_receiver = interaction.options.getUser('user').id;
 		const cookie_sender = interaction.user.id;
 		const profile = await userModel.findOne({
