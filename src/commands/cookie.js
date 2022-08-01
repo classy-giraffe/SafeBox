@@ -22,12 +22,12 @@ module.exports = {
 		const cookies = profile.cookies;
 		profile.cookies = cookies + 1;
 		await profile.save();
-		const cookie = new MessageEmbed()
+		const embed = new MessageEmbed()
 			.setColor('#55ff55')
 			.setTitle('You gave a cookie!')
 			.setURL('https://github.com/classy-giraffe')
 			.setDescription(`<@${cookie_sender}> gives a cookie to <@${cookie_receiver}>`)
 			.setFooter({ text: `That's ${profile.cookies} cookies now!` });
-		await interaction.reply({ embeds: [ cookie ] });
+		await interaction.reply({ embeds: [ embed ] });
 	},
 };

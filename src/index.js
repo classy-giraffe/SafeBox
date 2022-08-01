@@ -37,9 +37,10 @@ for (const file of eventFiles) {
 }
 
 // Initializing MongoDB Connection
-const dbURL = process.env.MONGO_INITDB_URL;
+const URI = process.env.MONGO_INITDB_URL;
+console.log(URI);
 try {
-	mongoose.connect(dbURL, {
+	mongoose.connect(URI, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 	});

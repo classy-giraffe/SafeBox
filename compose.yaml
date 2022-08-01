@@ -3,8 +3,11 @@ services:
     image: tommy03/safebox
     volumes:
       - bot:/bot
+    networks:
+      - my-network
     env_file:
       - src/.env
+  
   mongodb:
     image: mongo
     volumes:
@@ -13,13 +16,8 @@ services:
     restart: always
     ports:
       - 27017:27017
-    env_file:
-      - src/.env
-  mongo-express:
-    image: mongo-express
-    restart: always
-    ports:
-      - 8081:8081
+    networks:
+      - my-network
     env_file:
       - src/.env
 
@@ -29,5 +27,5 @@ volumes:
   configdb:
 
 networks:
-  front-tier: {}
-  back-tier: {}
+  my-network:
+    driver: bridge
