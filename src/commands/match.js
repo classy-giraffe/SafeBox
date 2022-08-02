@@ -1,4 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { MessageEmbed } = require('discord.js');
+const userModel = require('../models/userSchema');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -17,16 +19,56 @@ module.exports = {
 		),
 	async execute(interaction) {
 		if (!interaction.options.getUser('optional_user')) {
-			const mainUserID = interaction.options.getUser('main_user').id;
-			const interactionUserID = interaction.user.id;
-			const affinity = "placeholder";
-			console.log(affinity);
+			const primaryUser = interaction.options.getUser('main_user').id;
+			const secondaryUser = interaction.user.id;
+			let profile;
+			try {
+				profile = await userModel.findOne({
+					userID: primaryUser,
+					matches: { $exists: true },
+				});
+				if (!profile.matches.has(secondaryUser)) {
+					const affinity = Math.floor(Math.random() * 100);
+					profile.matches.set(secondaryUser, affinity);
+					await profile.save();
+				}
+			}
+			catch (err) {
+				console.error(err);
+			}
+			const embed = new MessageEmbed()
+				.setColor('#55ff55')
+				.setTitle('Affinity Check')
+				.setURL('https://github.com/classy-giraffe')
+				.setDescription(`Your affinity with <@${secondaryUser}> is ${profile.matches.get(secondaryUser)}%`)
+				.setFooter({ text: 'something' });
+			await interaction.reply({ embeds: [ embed ] });
 		}
 		else {
-			const mainUserID = interaction.options.getUser('main_user').id;
-			const optionalUserID = interaction.options.getUser('optional_user').id;
-			const affinity = "placeholder";
-			console.log(affinity);
+			const primaryUser = interaction.options.getUser('main_user').id;
+			const secondaryUser = interaction.options.getUser('optional_user').id;
+			let profile;
+			try {
+				profile = await userModel.findOne({
+					userID: primaryUser,
+					matches: { $exists: true },
+				});
+				if (!profile.matches.has(secondaryUser)) {
+					const affinity = Math.floor(Math.random() * 100);
+					profile.matches.set(secondaryUser, affinity);
+					await profile.save();
+				}
+			}
+			catch (err) {
+				console.error(err);
+			}
+			const embed = new MessageEmbed()
+				.setColor('#55ff55')
+				.setTitle('Affinity Check')
+				.setURL('https://github.com/classy-giraffe')
+				.setDescription(`The affinity between <@${primaryUser}> and <@${secondaryUser}> ${profile.matches.get(secondaryUser)}%`)
+				.setFooter({ text: 'something' });
+			await interaction.reply({ embeds: [ embed ] });
 		}
 	},
 };

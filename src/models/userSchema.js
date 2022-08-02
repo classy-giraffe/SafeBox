@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
 	pets: { type: Number, default: 0 },
 	slaps: { type: Number, default: 0 },
 	spanks: { type: Number, default: 0 },
+	matches: { type: Map, of: Number, default: new Map() },
 });
 
 const model = mongoose.model('users', userSchema);
