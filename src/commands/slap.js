@@ -9,7 +9,7 @@ module.exports = {
 		.addUserOption(option =>
 			option
 				.setName('user')
-				.setDescription('The user you wanna slap')
+				.setDescription('The user you wanna slap.')
 				.setRequired(true),
 		),
 	async execute(interaction) {
@@ -18,8 +18,7 @@ module.exports = {
 		const profile = await userModel.findOne({
 			userID: slap_receiver,
 		});
-		const slaps = profile.slaps;
-		profile.slaps = slaps + 1;
+		profile.slaps++;
 		await profile.save();
 		const embed = new MessageEmbed()
 			.setColor('#55ff55')

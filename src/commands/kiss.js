@@ -9,7 +9,7 @@ module.exports = {
 		.addUserOption(option =>
 			option
 				.setName('user')
-				.setDescription('The user you wanna kiss')
+				.setDescription('The user you wanna kiss.')
 				.setRequired(true),
 		),
 	async execute(interaction) {
@@ -18,8 +18,7 @@ module.exports = {
 		const profile = await userModel.findOne({
 			userID: kiss_receiver,
 		});
-		const kisses = profile.kisses;
-		profile.kisses = kisses + 1;
+		profile.kisses++;
 		await profile.save();
 		const embed = new MessageEmbed()
 			.setColor('#55ff55')

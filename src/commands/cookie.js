@@ -18,8 +18,7 @@ module.exports = {
 		const profile = await userModel.findOne({
 			userID: cookie_receiver,
 		});
-		const cookies = profile.cookies;
-		profile.cookies = cookies + 1;
+		profile.cookies++;
 		await profile.save();
 		const embed = new MessageEmbed()
 			.setColor('#55ff55')

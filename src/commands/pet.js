@@ -9,7 +9,7 @@ module.exports = {
 		.addUserOption(option =>
 			option
 				.setName('user')
-				.setDescription('The user you wanna pet')
+				.setDescription('The user you wanna pet.')
 				.setRequired(true),
 		),
 	async execute(interaction) {
@@ -18,8 +18,7 @@ module.exports = {
 		const profile = await userModel.findOne({
 			userID: pet_receiver,
 		});
-		const pets = profile.pets;
-		profile.pets = pets + 1;
+		profile.pets++;
 		await profile.save();
 		const embed = new MessageEmbed()
 			.setColor('#55ff55')

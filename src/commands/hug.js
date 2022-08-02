@@ -9,7 +9,7 @@ module.exports = {
 		.addUserOption(option =>
 			option
 				.setName('user')
-				.setDescription('The user you wanna hug')
+				.setDescription('The user you wanna hug.')
 				.setRequired(true),
 		),
 	async execute(interaction) {
@@ -18,8 +18,7 @@ module.exports = {
 		const profile = await userModel.findOne({
 			userID: hug_receiver,
 		});
-		const hugs = profile.hugs;
-		profile.hugs = hugs + 1;
+		profile.hugs++;
 		await profile.save();
 		const embed = new MessageEmbed()
 			.setColor('#55ff55')

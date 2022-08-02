@@ -5,11 +5,11 @@ const userModel = require('../models/userSchema');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('spank')
-		.setDescription('Spank somebody.')
+		.setDescription('Spank somebody!')
 		.addUserOption(option =>
 			option
 				.setName('user')
-				.setDescription('The user you wanna spank')
+				.setDescription('The user you wanna spank.')
 				.setRequired(true),
 		),
 	async execute(interaction) {
@@ -18,8 +18,7 @@ module.exports = {
 		const profile = await userModel.findOne({
 			userID: spank_receiver,
 		});
-		const spanks = profile.spanks;
-		profile.spanks = spanks + 1;
+		profile.spanks++;
 		await profile.save();
 		const embed = new MessageEmbed()
 			.setColor('#55ff55')
