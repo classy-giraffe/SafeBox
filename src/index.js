@@ -1,6 +1,6 @@
 require('dotenv').config();
-const fs = require('node:fs');
-const path = require('node:path');
+const fs = require('fs');
+const path = require('path');
 const mongoose = require('mongoose');
 const { Client, Collection, Intents } = require('discord.js');
 const { token } = process.env.DISCORD_TOKEN;
@@ -49,4 +49,5 @@ catch (err) {
 	console.error(err);
 }
 
+// Login to Discord API
 client.login(token);
