@@ -11,6 +11,6 @@ module.exports = {
 				.setRequired(true),
 		),
 	async execute(interaction) {
-		//
+		console.log(interaction);
 	},
 };
