@@ -5,7 +5,6 @@ module.exports = {
 	async execute(message) {
 		if (message.author.bot) return;
 		try {
-			console.log(message.author.id);
 			let profile = await userModel.findOne({
 				userID:  message.author.id,
 			});
@@ -13,7 +12,7 @@ module.exports = {
 				profile = await userModel.create({
 					userID:  message.author.id,
 				});
-				profile.save();
+				await profile.save();
 			}
 		}
 		catch (err) {
