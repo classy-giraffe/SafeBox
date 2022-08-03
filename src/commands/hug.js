@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 const userModel = require('../models/userSchema');
 
 module.exports = {
@@ -20,7 +19,7 @@ module.exports = {
 		});
 		profile.hugs++;
 		await profile.save();
-		const embed = new MessageEmbed()
+		const embed = new EmbedBuilder()
 			.setColor('#55ff55')
 			.setTitle('You gave a hug!')
 			.setURL('https://github.com/classy-giraffe')

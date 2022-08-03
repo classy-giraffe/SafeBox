@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 const userModel = require('../models/userSchema.js');
 
 module.exports = {
@@ -43,7 +42,7 @@ module.exports = {
 			catch (err) {
 				console.error(err);
 			}
-			const embed = new MessageEmbed()
+			const embed = new EmbedBuilder()
 				.setColor('#55ff55')
 				.setTitle('Affinity Check')
 				.setURL('https://github.com/classy-giraffe')
@@ -76,7 +75,7 @@ module.exports = {
 			catch (err) {
 				console.error(err);
 			}
-			const embed = new MessageEmbed()
+			const embed = new EmbedBuilder()
 				.setColor('#55ff55')
 				.setTitle('Affinity Check')
 				.setURL('https://github.com/classy-giraffe')
