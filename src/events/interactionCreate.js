@@ -5,6 +5,7 @@ module.exports = {
 	async execute(interaction) {
 		if (interaction.type !== InteractionType.ApplicationCommand) return;
 		const command = await interaction.client.commands.get(interaction.commandName);
+		console.log(interaction.client.commands);
 		if (!command) return;
 		try {
 			await command.execute(interaction);

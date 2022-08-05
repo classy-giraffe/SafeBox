@@ -10,15 +10,6 @@ const client = new Client({
 	],
 });
 
-// Handler
-client.aliases = new Collection();
-client.slashCommands = new Collection();
-module.exports = client;
-
-['commands', 'events'].forEach((handler) => {
-	require(`./handlers/${handler}`)(client);
-});
-
 // Initializing MongoDB Connection
 const URI = process.env.MONGO_INITDB_URL;
 try {
@@ -31,6 +22,14 @@ try {
 catch (err) {
 	console.error(err);
 }
+
+// Handlers
+client.commands = new Collection();
+module.exports = client;
+
+['commands', 'events'].forEach((handler) => {
+	require(`./handlers/${handler}`)(client);
+});
 
 // Login to Discord API
 client.login(token);
