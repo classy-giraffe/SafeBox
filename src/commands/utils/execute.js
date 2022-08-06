@@ -1,5 +1,5 @@
 const util = require('node:util');
-const { SlashCommandBuilder, EmbedBuilder, codeBlock } = require('@discordjs/builders');
+const { SlashCommandBuilder, EmbedBuilder, codeBlock } = require('discord.js');
 const exec = util.promisify(require('node:child_process').exec);
 
 module.exports = {

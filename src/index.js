@@ -1,7 +1,8 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
-const { token } = process.env.DISCORD_TOKEN;
+const token = process.env.DISCORD_TOKEN;
+const URI = process.env.MONGO_INITDB_URL;
 const client = new Client({
 	intents: [
 		GatewayIntentBits.Guilds,
@@ -11,11 +12,11 @@ const client = new Client({
 });
 
 // Initializing MongoDB Connection
-const URI = process.env.MONGO_INITDB_URL;
 try {
 	mongoose.connect(URI, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
+		family: 4,
 	});
 	console.log('Connected to MongoDB!');
 }
