@@ -13,8 +13,8 @@ module.exports = (client) => {
 		for (const file of files) {
 			const command = require(`../commands/${dir}/${file}`);
 			commands.push(command.data.toJSON());
-			if (command.name) {
-				client.commands.set(command.data, command);
+			if (command.data.name) {
+				client.commands.set(command.data.name, command);
 			}
 		}
 	});
