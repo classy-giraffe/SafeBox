@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('node:fs');
 const { Routes } = require('discord.js');
 const { REST } = require('@discordjs/rest');
 const clientId = process.env.CLIENT_ID;

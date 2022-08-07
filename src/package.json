@@ -4,6 +4,7 @@
   "description": "A discordjs multi-purpose bot",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "start": "pm2 start index.js --watch --no-daemon"
   },
   "repository": {
@@ -24,8 +25,7 @@
     "discord-api-types": "^0.37.0",
     "discord.js": "^14.1.2",
     "dotenv": "^16.0.1",
-    "mongodb": "^4.6.0",
-    "mongoose": "^6.3.5",
+    "mongoose": "^6.5.1",
     "pm2": "^5.2.0"
   }
 }
