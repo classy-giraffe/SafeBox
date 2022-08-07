@@ -4,7 +4,6 @@ const { REST } = require('@discordjs/rest');
 const clientId = process.env.CLIENT_ID;
 const guildId = process.env.GUILD_ID;
 const token = process.env.DISCORD_TOKEN;
-const rest = new REST({ version: '9' }).setToken(token);
 
 module.exports = (client) => {
 	const commands = [];
@@ -16,17 +15,9 @@ module.exports = (client) => {
 			client.commands.set(command.data.name, command);
 		}
 	});
-	(async () => {
-		try {
-			console.log('Started refreshing application (/) commands.');
-			await rest.put(
-				Routes.applicationGuildCommands(clientId, guildId),
-				{ body: commands },
-			);
-			console.log('Successfully reloaded application (/) commands.');
-		}
-		catch (error) {
-			console.error(error);
-		}
-	})();
+	const rest = new REST({ version: '10' }).setToken(token);
+	console.log('Started refreshing application (/) commands.');
+	rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
+		.then(() => console.log('Successfully reloaded application (/) commands.'))
+		.catch(console.error);
 };

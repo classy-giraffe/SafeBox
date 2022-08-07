@@ -20,27 +20,8 @@ module.exports = {
 		if (!interaction.options.getUser('optional_user')) {
 			const primaryUser = interaction.options.getUser('main_user').id;
 			const secondaryUser = interaction.user.id;
-			let primaryProfile;
-			let secondaryProfile;
-			try {
-				primaryProfile = await userModel.findOne({
-					userID: primaryUser,
-					matches: { $exists: true },
-				});
-				secondaryProfile = await userModel.findOne({
-					userID: secondaryUser,
-					matches: { $exists: true },
-				});
-				if (!primaryProfile.matches.has(secondaryUser) || !secondaryProfile.matches.has(primaryUser)) {
-					const affinity = Math.floor(Math.random() * 100);
-					primaryProfile.matches.set(secondaryUser, affinity);
-					secondaryProfile.matches.set(primaryUser, affinity);
-					await primaryProfile.save();
-					await secondaryProfile.save();
-				}
-			}
-			catch (err) {
-				console.error(err);
+			if (primaryUser === secondaryUser) {
+				embed.setDescription('You can\'t check your own affinity.');
 			}
 			const embed = new EmbedBuilder()
 				.setColor('#55ff55')
@@ -53,28 +34,6 @@ module.exports = {
 		else {
 			const primaryUser = interaction.options.getUser('main_user').id;
 			const secondaryUser = interaction.options.getUser('optional_user').id;
-			let primaryProfile;
-			let secondaryProfile;
-			try {
-				primaryProfile = await userModel.findOne({
-					userID: primaryUser,
-					matches: { $exists: true },
-				});
-				secondaryProfile = await userModel.findOne({
-					userID: secondaryUser,
-					matches: { $exists: true },
-				});
-				if (!primaryProfile.matches.has(secondaryUser) || !secondaryProfile.matches.has(primaryUser)) {
-					const affinity = Math.floor(Math.random() * 100);
-					primaryProfile.matches.set(secondaryUser, affinity);
-					secondaryProfile.matches.set(primaryUser, affinity);
-					await primaryProfile.save();
-					await secondaryProfile.save();
-				}
-			}
-			catch (err) {
-				console.error(err);
-			}
 			const embed = new EmbedBuilder()
 				.setColor('#55ff55')
 				.setTitle('Affinity Check')
