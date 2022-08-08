@@ -7,10 +7,11 @@ const token = process.env.DISCORD_TOKEN;
 
 export default (client: any) => {
 	const commands: Array<RESTPostAPIApplicationCommandsJSONBody> = [];
-	readdirSync('./commands/').forEach(async dir => {
-		const files = readdirSync(`./commands/${dir}/`).filter(file => file.endsWith('.js'));
+	readdirSync('src/commands/').forEach(async dir => {
+		const files = readdirSync(`src/commands/${dir}/`).filter(file => file.endsWith('.js'));
+		console.log(files);
 		for (const file of files) {
-			const command = require(`../commands/${dir}/${file}`);
+			const command = require(`src/commands/${dir}/${file}`);
 			commands.push(command.data.toJSON());
 			client.commands.set(command.data.name, command);
 		}

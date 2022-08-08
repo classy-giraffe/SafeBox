@@ -1,7 +1,6 @@
 import commands from './types/common/discord';
 import mongoose, { MongooseOptions } from 'mongoose';
 import { Client, Collection, GatewayIntentBits } from 'discord.js';
-const token = process.env.DISCORD_TOKEN;
 const URI = process.env.MONGO_INITDB_URL;
 const client = new Client({
 	intents: [
@@ -22,16 +21,22 @@ const client = new Client({
 		} as MongooseOptions);
 		console.log('Connected to MongoDB!');
 		console.log("Initializing Discord Client...");
-		await client.login(token);
+		await client.login();
 	}
 	catch (err) {
 		console.error(err);
 	}
 })();
 
-// Importing Events and Commands
+
 module.exports = client;
 client.commands = new Collection();
 ['commands', 'events'].forEach((handler) => {
-	require(`./handlers/${handler}`)(client);
+	import(`./handlers/${handler}`).then((module) => {
+		module.default(client);
+	}
+	).catch((err) => {
+		console.error(err);
+	}
+	);
 });
