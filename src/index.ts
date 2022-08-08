@@ -1,8 +1,8 @@
-require('dotenv').config();
-import mongoose from 'mongoose';
+import commands from './types/common/discord';
+import mongoose, { MongooseOptions } from 'mongoose';
 import { Client, Collection, GatewayIntentBits } from 'discord.js';
 const token = process.env.DISCORD_TOKEN;
-const URI: string | undefined = process.env.MONGO_INITDB_URL;
+const URI = process.env.MONGO_INITDB_URL;
 const client = new Client({
 	intents: [
 		GatewayIntentBits.Guilds,
@@ -11,26 +11,27 @@ const client = new Client({
 	],
 });
 
-// Initializing MongoDB Connection
-try {
-	mongoose.connect(URI, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-		family: 4,
-	});
-	console.log('Connected to MongoDB!');
-}
-catch (err) {
-	console.error(err);
-}
+// Initializing MongoDB Connection and logging in
+(async () => {
+	try {
+		console.log(`Connecting to MongoDB...`);
+		await mongoose.connect(URI as string, {
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+			family: 4,
+		} as MongooseOptions);
+		console.log('Connected to MongoDB!');
+		console.log("Initializing Discord Client...");
+		await client.login(token);
+	}
+	catch (err) {
+		console.error(err);
+	}
+})();
 
-// Handlers
-client.commands = new Collection();
+// Importing Events and Commands
 module.exports = client;
-
+client.commands = new Collection();
 ['commands', 'events'].forEach((handler) => {
 	require(`./handlers/${handler}`)(client);
 });
-
-// Login to Discord API
-client.login(token);

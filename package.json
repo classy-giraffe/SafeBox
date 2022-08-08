@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "ts-node src/index.ts",
+    "start": "ts-node -r dotenv/config src/index.ts",
     "test": "pm2 start src/index.js --watch --no-daemon"
   },
   "repository": {
