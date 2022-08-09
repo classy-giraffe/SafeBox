@@ -32,11 +32,9 @@ const client = new Client({
 module.exports = client;
 client.commands = new Collection();
 ['commands', 'events'].forEach((handler) => {
-	import(`./handlers/${handler}`).then((module) => {
+	import(`./handlers/${handler}`)
+	.then(module => {
 		module.default(client);
-	}
-	).catch((err) => {
-		console.error(err);
-	}
-	);
+	})
+	.catch(console.error);
 });
